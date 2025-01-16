@@ -163,3 +163,77 @@ This documentation provides a brief overview of Kafka commands, categorized by t
 | **Consumer Operations**   | `kafka-console-consumer.sh`, `kafka-consumer-groups.sh`.                         | Consume messages from topics, manage consumer groups, and reset offsets.      |
 | **Replication**           | `kafka-server-start.sh` for multiple brokers, `kafka-topics.sh` for replication. | Test topic replication and observe Kafka’s fault tolerance when brokers fail. |
 | **Zookeeper Interaction** | `zookeeper-shell.sh`.                                                            | Interact with Zookeeper for cluster state management and troubleshooting.     |
+
+
+### **Exercises**
+
+Here are some intermediate-level exercises to deepen your understanding of Kafka and its features
+
+### **1. Multi-Partition Topics and Consumer Groups**
+- **Exercise**: Create a topic with multiple partitions (e.g., 3 partitions) and start multiple consumers in the same consumer group.
+  - Produce messages to the topic and observe how Kafka distributes messages across partitions and consumers.
+  - Add or remove consumers dynamically and see how Kafka rebalances the partitions among the group.
+    
+
+### **2. Custom Serialization and Deserialization**
+- **Exercise**: Write a custom serializer and deserializer for a complex data type (e.g., a JSON object or a Protobuf message).
+  - Create a Kafka producer that uses your custom serializer to send messages.
+  - Create a Kafka consumer that uses your custom deserializer to read messages.
+
+
+### **3. Kafka Streams Application**
+- **Exercise**: Build a simple Kafka Streams application to process data in real-time.
+  - For example, create a stream that reads from a topic, transforms the messages (e.g., convert text to uppercase), and writes the results to another topic.
+  - Use the Kafka Streams DSL to define the processing logic.
+
+
+### **4. Exactly-Once Semantics**
+- **Exercise**: Configure a Kafka producer and consumer to achieve exactly-once semantics.
+  - Enable idempotence and transactions in the producer.
+  - Use a transactional consumer to read messages and commit offsets atomically.
+
+
+### **5. Kafka Connect with File Source/Sink**
+- **Exercise**: Set up Kafka Connect in standalone mode and use a file source connector to read data from a file and write it to a Kafka topic.
+  - Then, use a file sink connector to write data from the Kafka topic to another file.
+  - Experiment with different configurations (e.g., file formats, polling intervals).
+
+
+### **6. Monitoring and Metrics**
+- **Exercise**: Enable JMX for Kafka and use a monitoring tool (e.g., JConsole, Prometheus, or Grafana) to monitor Kafka metrics.
+  - Track metrics like message throughput, latency, and broker performance.
+  - Simulate high load and observe how Kafka handles it.
+
+- **Learning Outcome**: Gain insights into Kafka's performance and monitoring capabilities.
+
+
+### **7. Fault Tolerance and Recovery**
+- **Exercise**: Simulate a broker failure and observe how Kafka recovers.
+  - Stop the Kafka broker and see how producers and consumers behave.
+  - Restart the broker and verify that it rejoins the cluster and resumes operations.
+
+
+### **8. Log Compaction**
+- **Exercise**: Create a log-compacted topic and experiment with key-value messages.
+  - Produce messages with the same key and observe how Kafka retains only the latest value for each key.
+  - Use a consumer to read the compacted log and verify the results.
+    
+
+### **9. Kafka Security (Optional)**
+- **Exercise**: Enable SSL/TLS encryption and SASL authentication for your Kafka cluster.
+  - Configure a producer and consumer to use the secure connection.
+  - Test the setup by producing and consuming messages.
+
+
+### **10. Kafka with Docker**
+- **Exercise**: Set up a Kafka cluster using Docker and Docker Compose.
+  - Create a multi-broker Kafka cluster with Zookeeper.
+  - Experiment with scaling brokers and consumers.
+
+- **Learning Outcome**: Learn how to containerize Kafka for easier deployment and testing.
+
+
+### **11. Benchmarking Kafka**
+- **Exercise**: Use Kafka's built-in performance tools (`kafka-producer-perf-test` and `kafka-consumer-perf-test`) to benchmark your cluster.
+  - Measure throughput and latency under different workloads.
+  - Experiment with different configurations (e.g., batch size, compression).
