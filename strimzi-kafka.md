@@ -26,6 +26,12 @@ To start Minikube, use the following command:
 ```sh
 minikube start
 ```
+
+```sh
+# ALternatively, start Minikube with manual configuration using docker
+minikube start --driver=docker --memory=4096 --cpus=4
+```
+
 Important Considerations:
 - **Docker Desktop must be running** before executing `minikube start`, otherwise, you may encounter the following error:
   
@@ -173,51 +179,81 @@ kubectl delete -f kafka-cluster-ephemeral.yaml -n kafka
 kubectl apply -f kafka-cluster-ephemeral.yaml -n kafka
 ```
 
-### **4. Create a Kafka Topic**
+To verify Kafka’s bootstrap service, run:
+```
+kubectl get svc -n kafka
+```
+
+#### 4. Create a Kafka Topic
 To create a topic, define a `KafkaTopic` resource in a new YAML file (`kafka-topic.yaml`):
 
 ```yaml
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
-  name: my-topic
+  name: hello-world-topic
+  namespace: kafka
   labels:
     strimzi.io/cluster: my-kafka-cluster
-  namespace: strimzi
 spec:
-  partitions: 3
-  replicas: 3
+  partitions: 1
+  replicas: 1
+  config:
+    retention.ms: 7200000
+    segment.bytes: 1073741824
 ```
 
 Apply the topic configuration:
 
 ```sh
-kubectl apply -f kafka-topic.yaml -n strimzi
+kubectl apply -f kafka-topic.yaml -n kafka
 ```
 
 To verify the topic creation:
 
 ```sh
-kubectl get kafkatopics -n strimzi
+kubectl get kafkatopics -n kafka
 ```
 
 ---
 
-### **5. Producing & Consuming Messages**
+#### 5. Producing & Consuming Messages
 To test Kafka, you can run a producer and consumer inside the cluster.
 
-#### **Start a Kafka Producer**
+**Start a Kafka Producer**
+
 ```sh
-kubectl -n strimzi run kafka-producer -ti --image=quay.io/strimzi/kafka:latest --rm=true --restart=Never -- bin/kafka-console-producer.sh --broker-list my-kafka-cluster-kafka-bootstrap:9092 --topic my-topic
+# Send Messages
+kubectl -n kafka run kafka-producer -ti --image=quay.io/strimzi/kafka:latest-kafka-3.8.0 --rm=true --restart=Never -- bin/kafka-console-producer.sh --broker-list my-kafka-cluster-kafka-bootstrap:9092 --topic hello-world-topic
 ```
 
 Type messages and press **Enter** to send them.
 
-#### **Start a Kafka Consumer**
+Follow Troubleshooting steps if Kafka Producer Not Running
+
+- Checked Logs for Errors
+   ```sh
+   kubectl logs kafka-producer -n kafka
+   ```
+
+- Inspected the Pod for Additional Details
+   ```sh
+   kubectl describe pod kafka-producer -n kafka
+   ```
+
+- Try pulling the Required Kafka Image Manually
+   ```sh
+   docker pull quay.io/strimzi/kafka:latest-kafka-3.8.0
+   ```
+
+- Retry to Send Messages
+
+**Start a Kafka Consumer**
 Open another terminal and run:
 
 ```sh
-kubectl -n strimzi run kafka-consumer -ti --image=quay.io/strimzi/kafka:latest --rm=true --restart=Never -- bin/kafka-console-consumer.sh --bootstrap-server my-kafka-cluster-kafka-bootstrap:9092 --topic my-topic --from-beginning
+# Receive Messages
+kubectl -n kafka run kafka-consumer -ti --image=quay.io/strimzi/kafka:latest-kafka-3.8.0 --rm=true --restart=Never -- bin/kafka-console-consumer.sh --bootstrap-server my-kafka-cluster-kafka-bootstrap:9092 --topic hello-world-topic --from-beginning
 ```
 
 You should see the messages from the producer.
@@ -234,6 +270,11 @@ You should see the messages from the producer.
 2. `kubectl get deployments`
 3. `kubectl get nodes`
 4. `kubectl get pods`
+
+
+### Troubleshooting Guide
+
+#### 1. Unable to connect to the server: net/http: TLS handshake timeout
 
 
 ### References
