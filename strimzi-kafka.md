@@ -56,7 +56,11 @@ Important Considerations:
 ❗  /usr/local/bin/kubectl is version 1.30.5, which may have incompatibilities with Kubernetes 1.32.0.
     ▪ Want kubectl v1.32.0? Try 'minikube kubectl -- get pods -A'
 🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+
 ```
+
+> Minikube is not running, so first, try starting it using `minikube start` and check the status with `minikube status`. If it remains stuck, delete and restart Minikube using `minikube delete` followed by `minikube start`. For those using Docker as the virtual machine, ensure Docker is running by checking `docker ps`. If Docker is not running, start it and then retry `minikube start --driver=docker`. If Minikube still doesn't respond, check logs using `minikube logs` to identify any errors. Running `minikube start --alsologtostderr -v=8` can provide more debugging details. If the issue persists, restart Docker and try again.
+
 
 #### 3. Verifying `kubectl`
 `kubectl` is the command-line tool used to interact with Kubernetes clusters, including those created by Minikube. When Minikube is installed and started, it can automatically download and configure `kubectl` to work with the local Minikube cluster.
