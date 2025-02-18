@@ -226,7 +226,12 @@ kubectl get kafkatopics -n kafka
 #### 5. Producing & Consuming Messages
 To test Kafka, you can run a producer and consumer inside the cluster.
 
-**Start a Kafka Producer**
+**Run kafka-producer Inside an existing broker**
+```
+kubectl exec -it my-kafka-cluster-kafka-0 -n kafka -- bin/kafka-console-producer.sh --broker-list my-kafka-cluster-kafka-bootstrap:9092 --topic hello-world-topic
+```
+
+**Start a Kafka Producer on a separate pod**
 
 ```sh
 # Send Messages
@@ -254,7 +259,12 @@ Follow Troubleshooting steps if Kafka Producer Not Running
 
 - Retry to Send Messages
 
-**Start a Kafka Consumer**
+**Run kafka-consumer Inside an existing broker**
+```
+kubectl exec -it my-kafka-cluster-kafka-0 -n kafka -- bin/kafka-console-consumer.sh --bootstrap-server my-kafka-cluster-kafka-bootstrap:9092 --topic hello-world-topic --from-beginning
+```
+
+**Start a Kafka Consumer on a separate pod**
 Open another terminal and run:
 
 ```sh
