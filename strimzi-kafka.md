@@ -72,7 +72,9 @@ kubectl get nodes
 
 ### Install Strimzi Kafka Operator
 Create the strimzi namespace (if not created) & Download and apply the latest Strimzi YAML
+
 ```
+# kubectl get namespaces
 kubectl create namespace kafka
 kubectl apply -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
 ```
@@ -262,7 +264,11 @@ kubectl -n kafka run kafka-consumer -ti --image=quay.io/strimzi/kafka:latest-kaf
 
 You should see the messages from the producer.
 
----
+### K8 Concepts
+**Namespace**: Logical separation of resources in a cluster (e.g., `dev`, `prod`).  
+**Node**: A worker machine where Pods run (e.g., `node-1` in `kubectl get nodes`).  
+**Pod**: The smallest deployable unit containing containers (e.g., `nginx-pod` running an Nginx container).  
+**Deployment**: Manages and scales Pods, ensuring the desired state (e.g., `nginx-deployment` with 3 replicas).
 
 ### Open Questions
 
