@@ -79,7 +79,7 @@ kubectl apply -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
 
 After installation, check if the Strimzi Kafka operator is running:
 ```
-kubectl get pods -n strimzi
+kubectl get pods -n kafka
 ```
 Expected output should show strimzi-cluster-operator running.
 
