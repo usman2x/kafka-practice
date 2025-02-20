@@ -321,6 +321,12 @@ You should see the messages from the producer.
 
 #### 1. Unable to connect to the server: net/http: TLS handshake timeout
 
+### ToDo's
+
+1. **Version Control Kubernetes Infrastructure Files**:  
+   Host YAML files (e.g., for setting up the Strimzi Kafka cluster, Kafka topics, Kafka producer, and Kafka consumer) in GitHub to manage and version control your infrastructure. Set up Git to load the infrastructure as code.
+2. **Automate Incremental Manual Commands in a Bash Script**:  
+   Create a bash script to automate the setup of the Strimzi Kafka cluster, followed by the creation of Kafka topics, Kafka producer, and Kafka consumer. Execute these steps in a pipeline, ensuring that each subsequent operation starts only after the previous one has completed successfully.
 
 ### References
 1. https://strimzi.io/docs/operators/latest/overview 
