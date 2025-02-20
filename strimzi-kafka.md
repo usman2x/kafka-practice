@@ -280,6 +280,28 @@ You should see the messages from the producer.
 **Pod**: The smallest deployable unit containing containers (e.g., `nginx-pod` running an Nginx container).  
 **Deployment**: Manages and scales Pods, ensuring the desired state (e.g., `nginx-deployment` with 3 replicas).
 
+#### Pod Statuses and Their Meanings
+
+| **Status**             | **Meaning**                                                                 |
+|-------------------------|-----------------------------------------------------------------------------|
+| Pending                | Pod is waiting for resources or image pulls.                               |
+| Running                | Pod is actively running on a node.                                         |
+| Succeeded              | Pod completed successfully and will not restart.                           |
+| Failed                 | Pod terminated with a failure.                                             |
+| CrashLoopBackOff       | Pod is repeatedly crashing and restarting.                                 |
+| ImagePullBackOff       | Failed to pull the container image.                                        |
+| ErrImagePull           | Error occurred while pulling the container image.                          |
+| ContainerCreating      | Containers are being created and started.                                  |
+| Terminating            | Pod is being deleted or terminated.                                        |
+| Unknown                | Pod's state cannot be determined.                                          |
+| Completed              | Pod finished execution successfully.                                       |
+| Init:0/1               | Initialization containers are running, but not all have completed.         |
+| NodeLost               | Node hosting the pod is unreachable.                                       |
+| OOMKilled              | Pod was terminated due to exceeding memory limits.                         |
+| Evicted                | Pod was evicted due to resource constraints on the node.                   |
+
+---
+
 ### Open Questions
 
 1. What are the differences in nods, pods, deployments and namespaces
