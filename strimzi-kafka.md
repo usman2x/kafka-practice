@@ -272,6 +272,23 @@ Open another terminal and run:
 kubectl -n kafka run kafka-consumer -ti --image=quay.io/strimzi/kafka:latest-kafka-3.8.0 --rm=true --restart=Never -- bin/kafka-console-consumer.sh --bootstrap-server my-kafka-cluster-kafka-bootstrap:9092 --topic hello-world-topic --from-beginning
 ```
 
+**Alternative Create Pod and send/receive messages in separate commands**
+
+1. Create Pod
+```
+kubectl -n kafka run kafka-consumer -ti --image=quay.io/strimzi/kafka:latest-kafka-3.8.0 --restart=Never -- sleep infinity
+```
+
+2. SSH into the Kafka Producer / Kafka Consumer Pod
+```
+kubectl exec -it kafka-consumer -n kafka -- /bin/bash
+```
+
+3. Consume Messages
+```
+bin/kafka-console-consumer.sh  --bootstrap-server my-kafka-cluster-kafka-bootstrap:9092 --topic hello-world-topic --partition 0 --from-beginning
+```
+
 You should see the messages from the producer.
 
 ### K8 Concepts
