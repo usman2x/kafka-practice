@@ -302,16 +302,19 @@ You should see the messages from the producer.
 
 ---
 
-### Open Questions
-
-1. What are the differences in nods, pods, deployments and namespaces
-2. Why do we need namespace?
-
-### Cheet Sheet
+#### K8 Cheet Sheet
 1. `kubectl get namespaces`
 2. `kubectl get deployments`
 3. `kubectl get nodes`
 4. `kubectl get pods`
+
+
+### Open Questions & Cosiderations
+
+1. What are the differences in nodes, pods, deployments and namespaces in K8
+2. Why do we need namespaces in k8?
+3. Define K8 Infrastructure pipeline to automatically configure and deploy clusters
+4. Resource Utilization & Optimization 
 
 
 ### Troubleshooting Guide
