@@ -1,3 +1,5 @@
+Kafka for event-driven communication between micro services (Spring Boot-based)
+
 | **Component**            | **Tech Stack**                                         |
 |--------------------------|--------------------------------------------------------|
 | **Issue Service**        | Spring Boot + Kafka Producer                           |
