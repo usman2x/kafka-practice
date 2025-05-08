@@ -15,7 +15,7 @@ docker run -d \
   -p 8080:8080 \
   -e KAFKA_CLUSTERS_0_NAME=local-kafka \
   -e KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=host.docker.internal:9092 \
-  ghcr.io/kafka-ui:latest
+  ghcr.io/kafbat/kafka-ui
 ```
 
 You can define multiple clusters in the environment variables:
@@ -36,7 +36,7 @@ docker run -d --name kafka-ui -p 8080:8080 \
 -e KAFKA_CLUSTERS_0_SCHEMAREGISTRY=http://host.docker.internal:8081 \
 -e KAFKA_CLUSTERS_0_KAFKACONNECT_0_NAME=my-connect \
 -e KAFKA_CLUSTERS_0_KAFKACONNECT_0_ADDRESS=http://host.docker.internal:8083 \
-ghcr.io/kafka-ui:latest
+ghcr.io/kafbat/kafka-ui
 ```
 
 Check if the Container is Running
