@@ -1,6 +1,8 @@
 # UI For Apache Kafka
+Earlier, I relied on Kafka commands to create and manage topics, send messages, monitor topic status, and track consumer lag. But debugging issues or figuring out missing details in commands often consumed a lot of time, and working with command-line tools wasn't always efficient. To streamline these tasks, I explored Kafbat UI for Kafka cluster management. Using it for my proof of concept (POC), I’ve found it incredibly helpful, as it simplifies complex operations and provides an intuitive interface that eliminates the challenges of CLI-based management.
 
-Some Considerations before deep dive into Kafka-UI
+Here are some Considerations before deep dive into Kafka-UI
+
 * Kafka UI is a management tool, not a Kafka broker. It requires an existing Kafka cluster to connect to.
 * It’s great for testing and exploring Kafka without writing code or using complex CLI commands.
 * It supports creating topics, producing messages, and monitoring consumer lag.
