@@ -99,3 +99,22 @@ Once the topics are created, you can run performance tests on each topic to eval
 
 
 # Kafka Consumer Performance Testing
+
+Kafka provides a built-in performance testing tool:
+
+```
+bin/kafka-consumer-perf-test.sh --bootstrap-server localhost:9092 --topic test-topic --messages 100000 --threads 4
+```
+This command tests the consumer performance by consuming 100,000 messages using 4 threads.
+
+### Configuration Tuning
+
+Key configuration parameters that impact Kafka consumer performance include:
+
+* `heartbeat.interval.ms`: 3 seconds (3000 ms), Prevent the consumer from being considered dead by the broker, which would otherwise trigger a rebalance.
+* `fetch.min.bytes` - Minimum amount of data the consumer fetches in a single request. Higher values reduce network overhead but increase latency.
+* `fetch.max.wait.ms` - Maximum time the consumer will wait for enough data to reach the specified fetch.min.bytes.
+* `max.poll.records` - Maximum number of records returned in a single poll, affecting throughput.
+* `session.timeout.ms` - Time to detect consumer failures, reducing this increases availability but can cause more frequent rebalancing. The heartbeat.interval.ms must be significantly shorter than the session.timeout.ms (typically one-third) to ensure that the broker has enough time to detect a dead consumer if heartbeats stop arriving.
+* `enable.auto.commit` - If enabled, Kafka will commit the offset automatically, which can simplify consumer code but might lead to unprocessed messages on crash.
+* The `max.poll.interval.ms` is a key configuration parameter for Kafka consumers that defines the maximum time interval between successive calls to the poll() method before the consumer is considered "dead" by the Kafka group coordinator.
