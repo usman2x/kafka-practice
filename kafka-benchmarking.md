@@ -58,7 +58,7 @@ Once the topics are created, you can run performance tests on each topic to eval
 2. Adjust Parameters : Customize parameters like --num-records, --record-size, and --throughput to simulate different workloads.
 3. Analyze Results : Compare the performance metrics (throughput, latency) across topics to understand the impact of partitions and replication factors.
 
-# Key Observations
+### Key Observations
 
 **Impact of Partitions :**
 * More partitions generally allow higher parallelism, which can increase throughput.
@@ -66,6 +66,10 @@ Once the topics are created, you can run performance tests on each topic to eval
   
 **Impact of Replication Factor :**
 * Higher replication factors improve fault tolerance but reduce write throughput due to the need for replication across brokers.
+
+**Compression**
+* Compression in Kafka reduces the size of messages, improving network bandwidth utilization and storage efficiency. It is particularly useful for high-throughput systems or when dealing with large message sizes.
+* Compression can be enabled at the producer level using the `compression.type` property.
 
 **Acknowledgment Mode :**
 * Adjust acknowledgment settings (acks) to balance durability and performance `--producer-props acks=all`
@@ -88,3 +92,10 @@ Once the topics are created, you can run performance tests on each topic to eval
 - The producer waits for acknowledgments from all in-sync replicas (ISRs).  
 - Ensures the highest level of durability and fault tolerance at the cost of higher latency.  
 - Best suited for mission-critical applications where data loss must be avoided.
+
+**Batch Size (batch.size)**
+
+**Linger Time (linger.ms)**
+
+
+# Kafka Consumer Performance Testing
