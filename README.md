@@ -112,6 +112,23 @@ This documentation provides a brief overview of Kafka commands, categorized by t
 
 #### **Replication and Multiple Brokers**
 
+Multibroker cluster can be set up on a local machine without Docker or Kubernetes by configuring multiple Kafka broker instances with separate data directories and unique ports, all connected to a single Zookeeper instance for cluster coordination.
+
+**server-1.properties**
+```
+broker.id=1
+listeners=PLAINTEXT://localhost:9092
+log.dirs=/tmp/kafka-logs-1
+```
+
+**server-2.properties**
+```
+broker.id=2
+listeners=PLAINTEXT://localhost:9093
+log.dirs=/tmp/kafka-logs-2
+```
+
+
 1. **Start a second broker:**
 
    ```
