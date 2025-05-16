@@ -69,3 +69,22 @@ Once the topics are created, you can run performance tests on each topic to eval
 
 **Acknowledgment Mode :**
 * Adjust acknowledgment settings (acks) to balance durability and performance `--producer-props acks=all`
+
+1. **`acks=0`**
+- The producer sends messages without waiting for any acknowledgment from the broker.  
+- Provides the highest throughput and lowest latency but no guarantee of message delivery.  
+- Suitable for non-critical use cases where occasional data loss is acceptable.
+
+---
+
+2. **`acks=1`**
+- The producer waits for an acknowledgment from the leader broker only.  
+- Balances performance and durability but risks data loss if the leader crashes before replication.  
+- Ideal for general-purpose use cases requiring moderate reliability.
+
+---
+
+3. **`acks=all`**
+- The producer waits for acknowledgments from all in-sync replicas (ISRs).  
+- Ensures the highest level of durability and fault tolerance at the cost of higher latency.  
+- Best suited for mission-critical applications where data loss must be avoided.
