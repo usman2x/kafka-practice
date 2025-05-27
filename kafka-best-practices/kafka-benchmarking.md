@@ -118,3 +118,21 @@ Key configuration parameters that impact Kafka consumer performance include:
 * `session.timeout.ms` - Time to detect consumer failures, reducing this increases availability but can cause more frequent rebalancing. The heartbeat.interval.ms must be significantly shorter than the session.timeout.ms (typically one-third) to ensure that the broker has enough time to detect a dead consumer if heartbeats stop arriving.
 * `enable.auto.commit` - If enabled, Kafka will commit the offset automatically, which can simplify consumer code but might lead to unprocessed messages on crash.
 * The `max.poll.interval.ms` is a key configuration parameter for Kafka consumers that defines the maximum time interval between successive calls to the poll() method before the consumer is considered "dead" by the Kafka group coordinator.
+
+# Kafka End-to-End Performance Testing
+
+Kafka provides a built-in class `kafka.tools.EndToEndLatency` for measuring end-to-end. 
+
+```
+bin/kafka-run-class.sh kafka.tools.EndToEndLatency \
+  --broker-list localhost:9092 \
+  --topic latency-test \
+  --num-records 10000 \
+  --record-size 100 \
+  --throughput 1000
+```
+
+
+
+
+
